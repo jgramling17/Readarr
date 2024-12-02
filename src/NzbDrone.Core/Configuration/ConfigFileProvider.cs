@@ -53,6 +53,7 @@ namespace NzbDrone.Core.Configuration
         string SyslogServer { get; }
         int SyslogPort { get; }
         string SyslogLevel { get; }
+        string Theme { get; }
         string PostgresHost { get; }
         int PostgresPort { get; }
         string PostgresUser { get; }
@@ -60,7 +61,7 @@ namespace NzbDrone.Core.Configuration
         string PostgresMainDb { get; }
         string PostgresLogDb { get; }
         string PostgresCacheDb { get; }
-        string Theme { get; }
+        bool TrustCgnatIpAddresses { get; }
     }
 
     public class ConfigFileProvider : IConfigFileProvider
@@ -462,5 +463,7 @@ namespace NzbDrone.Core.Configuration
         {
             SetValue("ApiKey", GenerateApiKey());
         }
+
+        public bool TrustCgnatIpAddresses => _authOptions.TrustCgnatIpAddresses ?? GetValueBoolean("TrustCgnatIpAddresses", false, persist: false);
     }
 }
